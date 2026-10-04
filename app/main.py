@@ -1,142 +1,118 @@
-mkdir -p app/players/elves app/players/dwarves
-
-touch app/__init__.py
-touch app/players/__init__.py
-touch app/players/elves/__init__.py
-touch app/players/dwarves/__init__.py
-
-cat > app/players/player.py <<'EOF'
 from abc import ABC, abstractmethod
 
 
 class Player(ABC):
-    def __init__(self, nickname):
+    def __init__(self, nickname: str) -> None:
         self.nickname = nickname
 
     @abstractmethod
-    def get_rating(self):
+    def get_rating(self) -> int:
         pass
 
     @abstractmethod
-    def player_info(self):
+    def player_info(self) -> str:
         pass
-EOF
-
-cat > app/players/elves/elf.py <<'EOF'
-from app.players.player import Player
 
 
 class Elf(Player):
-    def __init__(self, nickname, musical_instrument):
+    def __init__(self, nickname: str, musical_instrument: str) -> None:
         super().__init__(nickname)
         self._musical_instrument = musical_instrument
 
-    def play_elf_song(self):
+    def play_elf_song(self) -> None:
         print(
             f"{self.nickname} is playing a song on the "
             f"{self._musical_instrument}"
         )
-EOF
-
-cat > app/players/elves/elf_ranger.py <<'EOF'
-from app.players.elves.elf import Elf
 
 
 class ElfRanger(Elf):
-    def __init__(self, nickname, musical_instrument, bow_level):
+    def __init__(
+        self,
+        nickname: str,
+        musical_instrument: str,
+        bow_level: int
+    ) -> None:
         super().__init__(nickname, musical_instrument)
         self._bow_level = bow_level
 
-    def get_rating(self):
+    def get_rating(self) -> int:
         return 3 * self._bow_level
 
-    def player_info(self):
+    def player_info(self) -> str:
         return (
             f"Elf ranger {self.nickname}. "
             f"{self.nickname} has bow of the {self._bow_level} level"
         )
-EOF
-
-cat > app/players/elves/druid.py <<'EOF'
-from app.players.elves.elf import Elf
 
 
 class Druid(Elf):
-    def __init__(self, nickname, musical_instrument, favourite_spell):
+    def __init__(
+        self,
+        nickname: str,
+        musical_instrument: str,
+        favourite_spell: str
+    ) -> None:
         super().__init__(nickname, musical_instrument)
         self._favourite_spell = favourite_spell
 
-    def get_rating(self):
+    def get_rating(self) -> int:
         return len(self._favourite_spell)
 
-    def player_info(self):
+    def player_info(self) -> str:
         return (
             f"Druid {self.nickname}. "
-            f"{self.nickname} has a favourite spell: "
-            f"{self._favourite_spell}"
+            f"{self.nickname} has a favourite spell: {self._favourite_spell}"
         )
-EOF
-
-cat > app/players/dwarves/dwarf.py <<'EOF'
-from app.players.player import Player
 
 
 class Dwarf(Player):
-    def __init__(self, nickname, favourite_dish):
+    def __init__(self, nickname: str, favourite_dish: str) -> None:
         super().__init__(nickname)
         self._favourite_dish = favourite_dish
 
-    def eat_favourite_dish(self):
+    def eat_favourite_dish(self) -> None:
         print(f"{self.nickname} is eating {self._favourite_dish}")
-EOF
-
-cat > app/players/dwarves/dwarf_warrior.py <<'EOF'
-from app.players.dwarves.dwarf import Dwarf
 
 
 class DwarfWarrior(Dwarf):
-    def __init__(self, nickname, favourite_dish, hummer_level):
+    def __init__(
+        self,
+        nickname: str,
+        favourite_dish: str,
+        hummer_level: int
+    ) -> None:
         super().__init__(nickname, favourite_dish)
         self._hummer_level = hummer_level
 
-    def get_rating(self):
+    def get_rating(self) -> int:
         return self._hummer_level + 4
 
-    def player_info(self):
+    def player_info(self) -> str:
         return (
             f"Dwarf warrior {self.nickname}. "
-            f"{self.nickname} has a hummer of the "
-            f"{self._hummer_level} level"
+            f"{self.nickname} has a hummer of the {self._hummer_level} level"
         )
-EOF
-
-cat > app/players/dwarves/dwarf_blacksmith.py <<'EOF'
-from app.players.dwarves.dwarf import Dwarf
 
 
 class DwarfBlacksmith(Dwarf):
-    def __init__(self, nickname, favourite_dish, skill_level):
+    def __init__(
+        self,
+        nickname: str,
+        favourite_dish: str,
+        skill_level: int
+    ) -> None:
         super().__init__(nickname, favourite_dish)
         self._skill_level = skill_level
 
-    def get_rating(self):
+    def get_rating(self) -> int:
         return self._skill_level
 
-    def player_info(self):
+    def player_info(self) -> str:
         return (
             f"Dwarf blacksmith {self.nickname} "
             f"with skill of the {self._skill_level} level"
         )
-EOF
-
-cat > app/main.py <<'EOF'
-from app.players.player import Player
-from app.players.elves.elf import Elf
-from app.players.elves.elf_ranger import ElfRanger
-from app.players.elves.druid import Druid
-from app.players.dwarves.dwarf import Dwarf
-from app.players.dwarves.dwarf_warrior import DwarfWarrior
-from app.players.dwarves.dwarf_blacksmith import DwarfBlacksmith
 
 
 def calculate_team_total_rating(team: list[Player]) -> int:
@@ -151,4 +127,3 @@ def elves_concert(elves: list[Elf]) -> None:
 def feast_of_the_dwarves(dwarves: list[Dwarf]) -> None:
     for dwarf in dwarves:
         dwarf.eat_favourite_dish()
-EOF
