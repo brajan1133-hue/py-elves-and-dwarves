@@ -1,7 +1,9 @@
+```python
 from pathlib import Path
 
+
 files = {
-    "app/players/player.py": '''from abc import ABC, abstractmethod
+    "app/players/player.py": """from abc import ABC, abstractmethod
 
 
 class Player(ABC):
@@ -15,9 +17,8 @@ class Player(ABC):
     @abstractmethod
     def player_info(self) -> str:
         pass
-''',
-
-    "app/players/elves/elf.py": '''from app.players.player import Player
+""",
+    "app/players/elves/elf.py": """from app.players.player import Player
 
 
 class Elf(Player):
@@ -30,9 +31,8 @@ class Elf(Player):
             f"{self.nickname} is playing a song "
             f"on the {self._musical_instrument}"
         )
-''',
-
-    "app/players/elves/elf_ranger.py": '''from app.players.elves.elf import Elf
+""",
+    "app/players/elves/elf_ranger.py": """from app.players.elves.elf import Elf
 
 
 class ElfRanger(Elf):
@@ -40,7 +40,7 @@ class ElfRanger(Elf):
         self,
         nickname: str,
         musical_instrument: str,
-        bow_level: int
+        bow_level: int,
     ) -> None:
         super().__init__(nickname, musical_instrument)
         self._bow_level = bow_level
@@ -54,9 +54,8 @@ class ElfRanger(Elf):
             f"{self.nickname} has bow of the "
             f"{self._bow_level} level"
         )
-''',
-
-    "app/players/elves/druid.py": '''from app.players.elves.elf import Elf
+""",
+    "app/players/elves/druid.py": """from app.players.elves.elf import Elf
 
 
 class Druid(Elf):
@@ -64,7 +63,7 @@ class Druid(Elf):
         self,
         nickname: str,
         musical_instrument: str,
-        favourite_spell: str
+        favourite_spell: str,
     ) -> None:
         super().__init__(nickname, musical_instrument)
         self._favourite_spell = favourite_spell
@@ -78,9 +77,8 @@ class Druid(Elf):
             f"{self.nickname} has a favourite spell: "
             f"{self._favourite_spell}"
         )
-''',
-
-    "app/players/dwarves/dwarf.py": '''from app.players.player import Player
+""",
+    "app/players/dwarves/dwarf.py": """from app.players.player import Player
 
 
 class Dwarf(Player):
@@ -90,9 +88,8 @@ class Dwarf(Player):
 
     def eat_favourite_dish(self) -> None:
         print(f"{self.nickname} is eating {self._favourite_dish}")
-''',
-
-    "app/players/dwarves/dwarf_warrior.py": '''from app.players.dwarves.dwarf import Dwarf
+""",
+    "app/players/dwarves/dwarf_warrior.py": """from app.players.dwarves.dwarf import Dwarf
 
 
 class DwarfWarrior(Dwarf):
@@ -100,7 +97,7 @@ class DwarfWarrior(Dwarf):
         self,
         nickname: str,
         favourite_dish: str,
-        hummer_level: int
+        hummer_level: int,
     ) -> None:
         super().__init__(nickname, favourite_dish)
         self._hummer_level = hummer_level
@@ -114,9 +111,8 @@ class DwarfWarrior(Dwarf):
             f"{self.nickname} has a hummer of the "
             f"{self._hummer_level} level"
         )
-''',
-
-    "app/players/dwarves/dwarf_blacksmith.py": '''from app.players.dwarves.dwarf import Dwarf
+""",
+    "app/players/dwarves/dwarf_blacksmith.py": """from app.players.dwarves.dwarf import Dwarf
 
 
 class DwarfBlacksmith(Dwarf):
@@ -124,7 +120,7 @@ class DwarfBlacksmith(Dwarf):
         self,
         nickname: str,
         favourite_dish: str,
-        skill_level: int
+        skill_level: int,
     ) -> None:
         super().__init__(nickname, favourite_dish)
         self._skill_level = skill_level
@@ -137,9 +133,8 @@ class DwarfBlacksmith(Dwarf):
             f"Dwarf blacksmith {self.nickname} "
             f"with skill of the {self._skill_level} level"
         )
-''',
-
-    "app/main.py": '''from app.players.player import Player
+""",
+    "app/main.py": """from app.players.player import Player
 from app.players.elves.elf import Elf
 from app.players.dwarves.dwarf import Dwarf
 
@@ -156,12 +151,12 @@ def elves_concert(elves: list[Elf]) -> None:
 def feast_of_the_dwarves(dwarves: list[Dwarf]) -> None:
     for dwarf in dwarves:
         dwarf.eat_favourite_dish()
-'''
+""",
 }
+
 
 for file_path, content in files.items():
     path = Path(file_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
-
-print("Gotowe! Wszystkie pliki zostały utworzone.")
+```
