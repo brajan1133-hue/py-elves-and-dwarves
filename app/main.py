@@ -1,17 +1,12 @@
-from abc import ABC, abstractmethod
-
-
-class Player(ABC):
+class Player:
     def __init__(self, nickname: str) -> None:
         self.nickname = nickname
 
-    @abstractmethod
     def get_rating(self) -> int:
-        pass
+        raise NotImplementedError
 
-    @abstractmethod
     def player_info(self) -> str:
-        pass
+        raise NotImplementedError
 
 
 class Elf(Player):
